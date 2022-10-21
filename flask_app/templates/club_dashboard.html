@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+</head>
+<main>
+<body>
+    <div class="container">
+        <nav >
+            <div class="row">
+                <div class="col-md text-capitalize">
+                        <h1>Car Meets</h1>
+                </div>
+                <div>
+                    <a style="text-decoration:underline;" href="/home" >Home</a>
+                    |
+                    <a style="text-decoration:underline;" href="/dashboard" >Profile</a>
+                    |
+                    <a style="text-decoration:underline;" href="/logout" >logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="col-10 p-5">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Club Name</th>
+                                <th scope="col">Founder</th>
+                                <th scope="col">Cars</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">extras</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meet in carmeets %}
+                                <tr>
+                                        <td><a style="text-decoration:underline;"  href="/pick/{{meet.id}}">{{meet.name}}</a></td>
+                                        <td>{{meet.users.first_name}}</td>
+                                        <td>{{meet.type}}</td>
+                                        <td>{{meet.location}}</td>
+                                        <td>{{meet.date_time}}</td>
+                                        <td>
+                                            {% if meet.users.id == session.user_id%}
+                                            <a style="text-decoration:underline;" href="/club/{{meet.id}}" >Update</a>
+                                            <a style="text-decoration:underline;" href="/delete/{{meet.id}}" >Delete</a>
+                                            {% endif %}
+                                        </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    </div>
+</body>
+</main>
+</html>

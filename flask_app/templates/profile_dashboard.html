@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<main>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav >
+            <div class="row">
+                <div class="col-md text-left text-capitalize">
+                    <h1>{{users.first_name}}</h1>
+                </div>
+                <div>
+                    <a style="text-decoration:underline;" href="/home" >Home</a>
+                    |
+                    <a style="text-decoration:underline;" href="/club/dash" >Clubs</a>
+                    |
+                    <a style="text-decoration:underline;" href="/logout" >Logout</a>
+                    |
+                    <a style="text-decoration:underline;" href="/new/car" >Cars</a>
+                </div>
+            </div>
+        </nav>
+        <div class="formtable" >
+            <form action="/dashboard/create" method="post">
+                <input type="hidden" name="creator_id" value="{{ session['user_id'] }}">
+                <div>
+                    <div class="form-group">
+                        <div>
+                            <label for="name">Club Name:</label>
+                            <input type="text" name="name" class="form-control">
+                        </div>
+                        <div>
+                            <label for="type">Type of Cars:</label>
+                            <input type="text" name="type" class="form-control" placeholder="mustang, corvette, classic, ect...">
+                        </div>
+                        <div> 
+                            <label for="location">Location:</label>
+                            <input type="text" name="location" class="form-control">
+                        </div>
+                        <div> 
+                            <label for="date_time">Date of Meet:</label>
+                            <input type="date" name="date_time" class="form-control">
+                        </div> 
+                    </div>
+                        <button type="submit" class="button">Submit</button>
+                </div>
+            </form>
+        
+            <div>
+                <div >
+                    <table class="table table-bordered">
+                        <h2>Following</h2>
+                        <thead>
+                            <tr>
+                                <th scope="col">Club Name</th>
+                                <th scope="col">Type of Cars</th>
+                                <th scope="col">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meet in users.carmeets %}
+                                <tr>
+                                    <td><a style="text-decoration:underline;"  href="/pick/{{meet.id}}">{{meet.name}}</a></td>
+                                    <td>{{meet.type}}</td>
+                                    <td>{{meet.location}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</main>
+</html>

@@ -1,0 +1,12 @@
+.formtable {
+    display: flex;
+    justify-content: space-between;
+}
+form {
+    height: 280px;
+    width: 300px;
+}
+
+nav {
+    margin-bottom: 30px;
+}

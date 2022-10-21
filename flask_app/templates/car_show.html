@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<main>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="col-9">
+            <div class="row">
+                <div class="col-md text-left text-capitalize">
+                    <h1>{{users.first_name}}</h1>
+                </div>
+                <div>
+                    <a style="text-decoration:underline;" href="/home" >Home</a>
+                    |
+                    <a style="text-decoration:underline;" href="/club/dash" >Clubs</a>
+                    |
+                    <a href="/new/car" style="text-decoration:underline;">Cars</a>
+                </div>
+            </div>
+        </nav>
+        <div class="row align-items-center">  
+            <div>
+                <div class="col-6 p-4">
+                    
+                                        <p>Make: {{cars.make}}</p>
+                                        <p>Model: {{cars.model}} </p>
+                                        <p>Description: {{cars.car_description}}</p>
+                </div>
+                <a style="text-decoration:underline;" href="/update_car/{{cars.id}}" >Update</a>
+                |
+                <a style="text-decoration:underline;" href="/{{cars.id}}/delete" >Delete</a>
+            </div>
+        </div>  
+    </div>
+</body>
+</main>
+</html>

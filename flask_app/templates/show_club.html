@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<main>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav >
+            <div class="row">
+                <div class="col-md text-capitalize">
+                        <h1>{{carmeets.name}}</h1>
+                </div>
+                <div>
+                    <a style="text-decoration:underline;" href="/home" >Home</a>
+                    |
+                    <a style="text-decoration:underline;" href="/dashboard" >Profile</a>
+                    |
+                    <a style="text-decoration:underline;" href="/club/dash" >Clubs</a>
+                </div>
+            </div>
+        </nav>
+        <div class='formtable'>
+            <div>
+                
+                <p>Car Types:   {{carmeets.type}}</p>
+                <p>Location:    {{carmeets.location}}</p>
+                <p>Date:    {{carmeets.date_time}}</p>
+
+                <div>
+                    {% if carmeets.follow_id != session.user_id %}
+                    <form action="/following" method="post">
+                        <input type="hidden" name="follow_id" value="{{ session['user_id'] }}">
+                        <input type="hidden" name="meet_id" value = "{{ carmeets.id }}">
+                        <button type="submit" class="button">Follow</button>
+                    </form>
+                    {% endif %}
+                    {% if carmeets.follow_id == session.user_id %}
+                    <form action="" method="post">
+                        <input type="hidden" name="follow_id" value="{{ carmeets.follow_id }}">
+                        <input type="hidden" name="meet_id" value = "{{ carmeets.meet_id }}">
+                        <button type="submit" class="button">Unfollow</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='giphy.gif') }}" alt="" width="600" height="600">
+            </div>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,53 @@
+main{
+    background-color: grey;
+    margin: auto;
+    width:auto;
+    height:969px;
+}
+.button{
+    text-decoration: none;
+    font-size: 20px;
+    color:white;
+    padding: 2px 20px;
+    border: 3px solid white;
+    position: relative;
+}
+.button::before,
+.button::after{
+    content: "";
+    position:absolute;
+    width: 40px;
+    height: 40px;
+    border: inherit;
+    transition: all .5s;
+}
+.button::before{
+    top: -10px;
+    left: -10px;
+    border-width: 3px 0 0 3px;
+}
+.button::after{
+    bottom: -10px;
+    right: -10px;
+    border-width: 0 3px 3px 0;
+}
+.button:hover::before,
+.button:hover::after{
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+a {
+    color:black;
+}
+
+button {
+    background-color: none;
+}

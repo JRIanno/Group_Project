@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<main>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='test.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='car_dash.css') }}">
+</head>
+<body>
+    <div class="container">
+        <nav class="col-9">
+            <div class="row">
+                <div class="col-md text-left text-capitalize">
+                    <h1>{{users.first_name}}</h1>
+                </div>
+                <div>
+                    <a style="text-decoration:underline;" href="/home" >Home</a>
+                    |
+                    <a style="text-decoration:underline;" href="/club/dash" >Clubs</a>
+                </div>
+            </div>
+        </nav>
+        <div class="row align-items-center">  
+            <div class="col-6 p-5">
+                <form action="/new/car/add" method="post">
+                    <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+                    <div>
+                        <div class="form-group">
+                            <div>
+                                <label for="make">Make:</label>
+                                <input type="text" name="make" style="width:175px;" class="form-control">
+                            </div>  
+                            <div> 
+                                <label for="model">Model:</label>
+                                <input type="text" name="model" style="width:175px;" class="form-control">
+                            </div> 
+                            <div>
+                                <label for="car_description">Car Description:</label>
+                                <br>
+                                <textarea name="car_description" cols="20" rows="6"></textarea>
+                            </div>                        
+                        </div>
+                            <button type="submit" class="btn btn-dark">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <div class="col-6 p-4">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Make</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Car Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for car in cars %}
+                                <tr>
+                                        <td><a style="text-decoration:underline;"  href="/show/{{car.id}}/car">{{car.make}}</a></td>
+                                        <td>{{car.model}}</td>
+                                        <td>{{car.car_description}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>  
+    </div>
+</body>
+</main>
+</html>
