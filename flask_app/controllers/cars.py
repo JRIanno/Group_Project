@@ -86,3 +86,4 @@ def edit(carmeets_id):
 def delete_meet(carmeets_id):
     Carmeets.delete(carmeets_id)
     return redirect('/club/dash')
+    
