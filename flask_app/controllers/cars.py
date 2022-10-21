@@ -24,6 +24,7 @@ def user_create():
     Carmeets.create_meet(data)
     return redirect('/dashboard')
 
+
 @app.route('/pick/<int:carmeets_id>')
 def pick(carmeets_id):
     data = {
